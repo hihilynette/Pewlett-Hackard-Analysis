@@ -6,7 +6,7 @@ SELECT e.emp_no,
 	   t.title,
 	   t.from_date,
 	   t.to_date
-INTO retirement_titles
+-- INTO retirement_titles
 FROM employees as e
 INNER JOIN titles as t
 ON (e.emp_no = t.emp_no)
@@ -18,7 +18,7 @@ SELECT DISTINCT ON (rt.emp_no) rt.emp_no,
 	                rt.first_name,
 					rt.last_name,
 					rt.title
-INTO unique_titles
+-- INTO unique_titles
 FROM retirement_titles as rt
 WHERE (rt.to_date = '9999-01-01')
 ORDER BY rt.emp_no ASC, rt.to_date DESC;
@@ -80,3 +80,10 @@ SELECT COUNT(ut.title), ut.title
 FROM retiring_unique_titles AS ut
 GROUP BY ut.title
 ORDER BY COUNT(ut.title) DESC;
+
+-- Count mentor amount
+SELECT COUNT(me.title), me.title
+-- INTO mentor_count
+FROM mentorship_eligibility AS me
+GROUP BY me.title
+ORDER BY COUNT(me.title) DESC;
